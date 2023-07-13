@@ -1,0 +1,88 @@
+{% extends 'base_site.html' %}
+{% block maincontent %}
+{% load static %}
+<section class="container forms">
+  
+    <!-- Signup Form -->
+
+    <div class="form signup">
+        <div class="form-content">
+            <header>Signup</header>
+            <form action="#" method="POST" autocomplete = "off">
+                {% csrf_token %}
+                {% comment %} <div class="field input-field">
+                    <input type="text" placeholder="User name" class="input" name="user_name">
+                </div>
+                <div class="field input-field">
+                    <input type="email" placeholder="Email" class="input" name="user_email">
+                </div>
+
+                <div class="field input-field">
+                    <input type="password" placeholder="Create password" class="password" name="user_pass1">
+                </div>
+
+                <div class="field input-field">
+                    <input type="password" placeholder="Confirm password" class="password" name="user_pass2">
+                    <i class='bx bx-hide eye-icon'></i>
+                </div> {% endcomment %}
+                {% for field in form %}
+                <div class="field input-fields">
+
+                    {{ field }}
+                </div>
+                {% if field.errors %}
+                    <div class="error-message">
+                        {% for error in field.errors %}
+                        <span class="error-text">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        
+                {% comment %} <div class="field input-field">
+                    {{ form.username }}
+                </div>
+
+                <div class="field input-field">
+                    {{ form.email }}
+                </div>
+
+                <div class="field input-field">
+                    {{ form.password1 }}
+                </div>
+
+                <div class="field input-field">
+                    {{ form.password2 }}
+                    <i class='bx bx-hide eye-icon'></i>
+                </div> {% endcomment %}
+
+                <div class="field button-field">
+                    <button type="submit">Signup</button>
+                </div>
+            </form>
+
+            <div class="form-link">
+                <span>Already have an account? <a href="{% url 'user:login' %}" class="link login-link">Login</a></span>
+            </div>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="media-options">
+            <a href="#" class="field facebook">
+                <i class='bx bxl-facebook facebook-icon'></i>
+                <span>Login with Facebook</span>
+            </a>
+        </div>
+
+        <div class="media-options">
+            <a href="#" class="field google">
+                <img src="images/google.png" alt="" class="google-img">
+                <span>Login with Google</span>
+            </a>
+        </div>
+
+    </div>
+  
+</section>
+{% endblock maincontent%}
