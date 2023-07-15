@@ -6,7 +6,7 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   text-transform: capitalize;
-  text-decoration: none;
+  text-decoration: none !important;
   outline: none;
   border: none;
   -webkit-transition: all .2s linear;
@@ -58,6 +58,7 @@ section {
 .heading p a {
   padding-right: .5rem;
   color:chocolate;
+  text-decoration: none !important;
 }
 
 .heading p a:hover {
@@ -88,6 +89,8 @@ section {
   font-size: 2.5rem;
   font-weight: bolder;
   color: #fff;
+  text-decoration: none !important;
+  text-transform: uppercase;
 }
 
 .header .logo i {
@@ -95,12 +98,13 @@ section {
 }
 
 .header .navbar ul {
-  list-style: none;
+  list-style: none !important;
 }
 
 .header .navbar ul li {
   position: relative;
   float: left;
+
 }
 
 .header .navbar ul li:hover ul {
@@ -112,6 +116,8 @@ section {
   display: block;
   font-size: 1.7rem;
   color: #fff;
+  text-decoration: none !important;
+
 }
 
 .header .navbar ul li a:hover {
@@ -462,6 +468,8 @@ header #login:hover{
   font-size: 1.4rem;
   padding: 1rem 0;
   color: #666;
+  text-decoration: none !important;
+
 }
 
 .footer .box-container .box a:hover {

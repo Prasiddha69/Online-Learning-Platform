@@ -1,13 +1,18 @@
 {% extends 'base_site.html' %}
 {% block maincontent %}
 {% load static %}
-<section class="container forms">
+<section class="container_form forms">
   
     <!-- Signup Form -->
-
+    
     <div class="form signup">
         <div class="form-content">
             <header>Signup</header>
+            {% if messages %}
+            {% for message in messages %}
+             <div class="alert alert-success mt-4">{{message}}</div>
+            {% endfor %}
+        {% endif %}
             <form action="#" method="POST" autocomplete = "off">
                 {% csrf_token %}
                 {% comment %} <div class="field input-field">
@@ -37,6 +42,7 @@
                         {% endfor %}
                     </div>
                 {% endif %}
+                
             {% endfor %}
         
                 {% comment %} <div class="field input-field">
