@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ols_app',
     'useraccount',
+    'embed_video',
 ]
 
 MIDDLEWARE = [
