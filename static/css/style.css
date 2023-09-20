@@ -22,21 +22,20 @@ section {
   padding: 3rem 9%;
 }
 
-.btn {
-  display: inline-block;
+.btn_detail {
   margin-top: 1rem;
   padding: 1rem 3rem;
-  background: #e9edfb;
-  color: #224bcf;
+  color:#fff;
+  background-color: #224bcf;
   cursor: pointer;
   border-radius: .5rem;
   font-size: 1.7rem;
 }
 
-.btn:hover {
+/* .btn_detail:hover {
   color: #fff;
   background: #224bcf;
-}
+} */
 
 .heading {
   background: url(../images/heading.png) no-repeat;
@@ -83,6 +82,7 @@ section {
           justify-content: space-between;
   padding: 0 9%;
   background: #224bcf;
+  height:8rem;
 }
 
 .header .logo {
@@ -150,6 +150,7 @@ header #login:hover{
   font-size: 2.5rem;
   display: none;
 }
+
 
 .home {
   display: -webkit-box;
@@ -499,53 +500,3 @@ header #login:hover{
   color:chocolate;
 }
 
-@media (max-width: 1200px) {
-  html {
-    font-size: 55%;
-  }
-  section {
-    padding: 3rem 2rem;
-  }
-}
-
-@media (max-width: 768px) {
-  #menu-btn {
-    display: inline-block;
-  }
-  .header {
-    padding: 2rem;
-  }
-  .header .navbar {
-    position: absolute;
-    top: 99%;
-    left: 0;
-    right: 0;
-    background: #224bcf;
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-  }
-  .header .navbar.active {
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  }
-  .header .navbar ul li {
-    width: 100%;
-  }
-  .header .navbar ul li ul {
-    width: 100%;
-    position: relative;
-  }
-  .about .content h3 {
-    font-size: 3rem;
-  }
-  .main-video video {
-    width: 95%;
-    border-width: .2rem;
-  }
-}
-
-@media (max-width: 450px) {
-  html {
-    font-size: 50%;
-  }
-}
