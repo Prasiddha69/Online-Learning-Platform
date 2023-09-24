@@ -38,17 +38,19 @@
               clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     }  */
  
-
+      /* Navbar */
     .header .navbar{
       margin-top:0;
       padding-top: 0;
       position:absolute;
       top:7rem;
       left:0;
-      height:100%;
       width: 100%;
       display:none;
       z-index:999999999;
+      background: #224bcf;
+      padding-bottom: 1rem;
+    
 
     }
     .navbar .hide{
@@ -57,13 +59,51 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: #224bcf;
       width:100% !important;
 
 
       
     }
 
+    .navbar .signin{
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding:1.5rem 0.3rem;
+    }
+    .navbar .signin button{
+      font-size: 1.6rem;
+      padding:.8rem 1rem;
+      border-radius: .6rem;
+      color:white;
+
+      
+    }
+    .navbar .signin a:nth-child(1) button{
+      background-color: chocolate;
+
+    }
+    .navbar .signin a:nth-child(3) button{
+      background-color: green;
+
+    }
+    .navbar .signin a:nth-child(1) button:hover{
+      border-color:chocolate;
+      color:chocolate;
+      background-color: white;
+    }
+    .navbar .signin a:nth-child(3) button:hover{
+      border-color:green;
+      color:green;
+      background-color: white;
+    }
+    .navbar .signin span{
+      color:white;
+      font-size: 1.3rem;
+      margin:.8rem;
+
+    }
     .show{
       display:block !important;
     }
@@ -78,6 +118,34 @@
       width: 100%;
       position: relative;
     }
+
+
+    #signout{
+      display:none !important;
+    }
+    #signout-show{
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: .8rem;  
+    }
+    #signout-show ul{
+      
+      position:relative;
+      background-color: #224bcf;
+
+     
+    }
+    #signout-show ul li{
+      color:white !important;
+      text-align: center;
+    }
+    #signout-show ul li a h5:hover{
+     color:chocolate;
+    }
+
+    /* Navbar end */
     .about .content h3 {
       font-size: 3rem;
     }
@@ -86,12 +154,13 @@
       border-width: .2rem;
     }
 
-    /* Navbar  */
 
 
     #login{
         display:none;
     }
+   
+  
     #menu-btn {
         display:inline-block;
         position:absolute;

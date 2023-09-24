@@ -22,4 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('ols_app.urls',namespace="ols_app")),
     path('',include('useraccount.urls',namespace="user")),
+    path('accounts/', include('allauth.urls')),
+
 ]+ static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

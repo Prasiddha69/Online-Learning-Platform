@@ -32,13 +32,13 @@ section {
   font-size: 1.7rem;
 }
 
-/* .btn_detail:hover {
+.btn_detail:hover {
   color: #fff;
-  background: #224bcf;
-} */
+  background: chocolate;
+}
 
 .heading {
-  background: url(../images/heading.png) no-repeat;
+  background: url(../images/heading.png) no-repeat; 
   background-size: cover;
   background-position: center;
 }
@@ -121,7 +121,8 @@ section {
 }
 
 .header .navbar ul li a:hover {
-  background: chocolate;
+  color: chocolate;
+  transition: all 0.3s ease-in-out;
 }
 
 .header .navbar ul li ul {
@@ -144,13 +145,42 @@ header #login:hover{
    color:#444;
 }
 
+
 #menu-btn {
   cursor: pointer;
   color: #fff;
   font-size: 2.5rem;
   display: none;
 }
+.navbar .signin{
+  display:none;
+}
 
+.facebook-img{
+  height:20px;
+  width:20px;
+  object-fit: cover;
+}
+.media-options .facebook img{
+  margin-right:.5rem;
+}
+.media-options .facebook span:hover{
+  color:white !important;
+}
+
+
+.login-logo img{
+  width:20px !important;
+  height:20px !important;
+}
+
+.dropdown menu li a{
+  font-size:1rem;
+}
+
+#signout-show{
+  display:none;
+}
 
 .home {
   display: -webkit-box;
@@ -500,3 +530,16 @@ header #login:hover{
   color:chocolate;
 }
 
+
+/* Dashboard styling */
+
+.logo-img i{
+  font-size: 2rem;
+}
+
+.dashboard-title{
+  font-size:2.3rem;
+  text-transform: uppercase;
+  font-weight: bold;
+
+}

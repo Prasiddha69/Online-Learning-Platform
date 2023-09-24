@@ -37,6 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'allauth', # for social auth
+    'allauth.account', # for social auth
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
     'ols_app',
     'useraccount',
     'embed_video',
@@ -44,6 +49,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -139,6 +145,34 @@ AUTH_USER_MODEL = "useraccount.User"
 AUTHENTICATION_BACKENDS = [
     'useraccount.views.EmailBackend',
     'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 
                            
     ]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'APP': {
+            'client_id': '117533491451518',
+            'secret': 'b3448356cc47d318375dd4da9dc0d1a0',
+            'key': 'your_facebook_app_key',  # Optional
+        }
+    },
+    'google': {
+        'APP': {
+            'client_id': 'your_google_client_id',
+            'secret': 'your_google_client_secret',
+        }
+    }
+}
+
+
+SITE_ID = 1
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+
+LOGIN_REDIRECT_URL = 'ols_name:home'
+# LOGOUT_REDIRECT_URL = "ols_name:home"
+
+
+

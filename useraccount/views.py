@@ -5,6 +5,8 @@ from useraccount.forms import RegisterForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.backends import ModelBackend
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 
 User = get_user_model()
 
@@ -30,7 +32,10 @@ def login_view(request):
 
         print(user_email)
         print(user_pass)
-
+        if ((user_email == '' or None) or (user_pass == '' or None)):
+            messages.add_message(request, messages.ERROR, "Please complete the form")
+            return redirect("user:login")
+                          
         try:
                 valid_user = authenticate(request,email=user_email, password=user_pass)
                 print(valid_user)
@@ -64,3 +69,7 @@ def register_view(request):
     }
     return render(request,"register.html",context)
 
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('ols_name:home')

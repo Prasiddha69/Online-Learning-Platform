@@ -1,6 +1,6 @@
     
 <!-- header section starts  -->
-
+{% load static %}
 <header class="header">
 
    <a href="{% url 'ols_name:home' %}" class="logo"> <i class="fas fa-graduation-cap"></i> ols </a>
@@ -15,8 +15,46 @@
            <li><a href="{% url 'ols_name:teacher' %}">teachers</a></li>
            <li><a href="{% url 'ols_name:contact' %}">contact</a></li>
        </ul>
+       {% if not user.is_authenticated %}
+
+       <div class="signin">
+       <a href="{% url 'user:login' %}"><button type="button" class="btn">Login</button></a>
+       <span> or </span>
+       <a href="{% url 'user:register' %}"><button type="button" class="btn">Signup</button></a>
+       </div>
+       {% endif %}
+
+       {% if user.is_authenticated %}
+       <div id="signout-show" class="dropdown">
+        <button class="btn dropdown-toggle" style="color:white; font-size:1.5rem; border:0;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{user.username}}<span class="login-logo"><img src = "{% static 'images/man.png'%}"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{% url 'ols_name:dashboard' %}"><h5>Dashboard</h5></a></li>
+          <li><a class="dropdown-item" href="{% url 'user:logout' %}"><h5>Logout</h5></a></li>
+        </ul>
+      </div>
+       {% endif %}
    </nav>
-   <a href="{% url 'user:login' %}"><div id="login" class="fas fa-user-circle"></div></a>
+   {% if not user.is_authenticated %}
+   <a href="{% url 'user:login' %}"><div id="login" class="fas fa-user-circle login"></div></a>
+   {% endif %}
+   {% if user.is_authenticated %}
+   {% comment %} <a href="{% url 'user:logout' %}">Logout</div></a> {% endcomment %}
+    {% comment %} <link type="{% static 'images/images/Web/icons8-user-ios-16-96.png' %}" sizes="96x96" rel="icon" href=".../icons8-user-96.png"> {% endcomment %}
+
+
+
+   <div id="signout" class="dropdown">
+    <button class="btn dropdown-toggle" style="color:white; font-size:1.5rem; border:0;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        {{user.username}}<span class="login-logo"><img src = "{% static 'images/man.png'%}"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="{% url 'ols_name:dashboard' %}"><h5>Dashboard</h5></a></li>
+      <li><a class="dropdown-item" href="{% url 'user:logout' %}"><h5>Logout</h5></a></li>
+    </ul>
+  </div>
+   {% endif %}
 
 </header>
 

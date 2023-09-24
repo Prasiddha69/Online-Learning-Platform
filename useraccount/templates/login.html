@@ -1,6 +1,8 @@
 {% extends 'base_site.html' %}
 {% block maincontent %}
+{% load socialaccount %}
 {% load static %}
+
 <section class="container_form forms">
 
         <div class="form login">
@@ -39,14 +41,14 @@
             <div class="line"></div>
 
             <div class="media-options">
-                <a href="#" class="field facebook">
-                    <i class='bx bxl-facebook facebook-icon'></i>
+                <a href="{% provider_login_url 'facebook' %}" class="field facebook">
+                    <img src="{% static 'images/Facebook_Logo_Primary.png' %}" alt="" class="facebook-img">
                     <span>Login with Facebook</span>
                 </a>
             </div>
 
             <div class="media-options">
-                <a href="#" class="field google">
+                <a href="{% provider_login_url 'google' %}" class="field google">
                     <img src="{% static 'images/google.png' %}" alt="" class="google-img">
                     <span>Login with Google</span>
                 </a>
