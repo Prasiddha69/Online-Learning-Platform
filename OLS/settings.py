@@ -153,8 +153,8 @@ AUTHENTICATION_BACKENDS = [
 SOCIALACCOUNT_PROVIDERS = {
     'facebook': {
         'APP': {
-            'client_id': '117533491451518',
-            'secret': 'b3448356cc47d318375dd4da9dc0d1a0',
+            # 'client_id': '',
+            'secret': '',
             'key': 'your_facebook_app_key',  # Optional
         }
     },
