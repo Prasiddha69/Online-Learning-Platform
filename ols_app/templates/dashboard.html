@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="{% static 'css/tabler-icons.css' %}">
 <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 {% endblock stylesheet %}
 
@@ -52,7 +53,7 @@
     <!--  Main wrapper -->
     <div class="body-wrapper">
       <!--  Header Start -->
-      <header class="app-header">
+      <header class="app-header" style="position:fixed; top:0; right:0; width:100%;">
         <nav class="navbar navbar-expand-lg navbar-light">
           <ul class="navbar-nav">
             <li class="nav-item d-block d-xl-none">
@@ -89,6 +90,74 @@
         </nav>
       </header>
       <!--  Header End -->
+      <section class="course-1" style="margin-top:2rem;">
+      {% for course in enrolled_course %}
+        <div class="box">
+            <img src="{{course.card_image.url}}" alt="">
+            <h3>{{course.course_name}}</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque, earum.</p>
+            <a href="login/login.html" class="btn_detail">course materials</a>
+        </div>
+        {% endfor %}
+    
+        {% comment %} <div class="box">
+            <img src="{% static 'images/subject.jpg' %}" alt="">
+            <h3>2nd semester</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque, earum.</p>
+            <a href="login/login.html" class="btn_detail">course materials</a>
+        </div>
+    
+        <div class="box">
+            <img src="{% static 'images/subject.jpg' %}" alt="">
+            <h3>3rd semester</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque, earum.</p>
+            <a href="login/login.html" class="btn_detail">course materials</a>
+        </div>
+    
+        <div class="box">
+            <img src="{% static 'images/subject.jpg' %}" alt="">
+            <h3>4th semester</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque, earum.</p>
+            <a href="login/login.html" class="btn_detail">course materials</a>
+        </div>
+    
+        <div class="box">
+            <img src="{% static 'images/subject.jpg' %}" alt="">
+            <h3>5th semester</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque, earum.</p>
+            <a href="login/login.html" class="btn_detail">course materials</a>
+        </div>
+    
+        <div class="box">
+            <img src="{% static 'images/subject.jpg' %}" alt="">
+            <h3>6th semester</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque, earum.</p>
+            <a href="login/login.html" class="btn_detail">course materials</a>
+        </div>
+    
+        <div class="box">
+            <img src="{% static 'images/subject.jpg' %}" alt="">
+            <h3>Java Programming</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque, earum.</p>
+            <a href="login/login.html" class="btn_detail">course materials</a>
+        </div>
+    
+        <div class="box">
+            <img src="{% static 'images/subject.jpg' %}" alt="">
+            <h3>7th semester</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque, earum.</p>
+            <a href="login/login.html" class="btn_detail">course materials</a>
+        </div>
+    
+        <div class="box">
+            <img src="{% static 'images/subject.jpg' %}" alt="">
+            <h3>8th semester</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque, earum.</p>
+            <a href="login/login.html" class="btn_detail_detail">course materials</a>
+        </div>
+     {% endcomment %}
+    </section>
+    
      
     </div>
   </div>

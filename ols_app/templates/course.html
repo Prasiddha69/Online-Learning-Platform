@@ -8,22 +8,35 @@
     <p> <a href="{% url 'ols_name:home' %}">home >></a> courses </p>
 </section>
 <section class="course-1">
-
+   {% for course in courses %}
     <div class="box">
-        <img src="{% static 'images/subject.jpg' %}" alt="">
-        <h3>1st semester</h3>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque, earum.</p>
-        <a href="login/login.html" class="btn_detail">course materials</a>
+        {% if course.card_image %}
+        <img src="{{course.card_image.url}}" alt="">
+        {% endif %}
+        <h3>{{course.course_name}}</h3>
+        <p>{{course.card_desc}}</p>
+        {% if user.is_authenticated %}
+
+
+            <button type="submit" data-course-id="{{course.id}}" data-url="{% url 'ols_name:Enrolled' %}" class="btn_detail add_to_dashboard" >Enroll</button>
+
+        {% else %}
+        <button id="login_check" class="btn_detail">Enroll</button>
+        {% endif %}
+
+
+
     </div>
+    {% endfor %}
 
-    <div class="box">
+    {% comment %} <div class="box">
         <img src="{% static 'images/subject.jpg' %}" alt="">
         <h3>2nd semester</h3>
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque, earum.</p>
         <a href="login/login.html" class="btn_detail">course materials</a>
-    </div>
+    </div> {% endcomment %}
 
-    <div class="box">
+    {% comment %} <div class="box">
         <img src="{% static 'images/subject.jpg' %}" alt="">
         <h3>3rd semester</h3>
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque, earum.</p>
@@ -70,10 +83,54 @@
         <h3>8th semester</h3>
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque, earum.</p>
         <a href="login/login.html" class="btn_detail_detail">course materials</a>
-    </div>
+    </div> {% endcomment %}
 
 </section>
 
 <!-- course-1 section ends -->
 
 {% endblock maincontent %}
+
+{% block script%}
+
+{{block.super}}
+<script type="text/javascript">
+let login_check = document.getElementById('login_check');
+$(document).ready(function(){
+  $('.add_to_dashboard').click(function(){
+
+    var courseId = $(this).data('course-id');
+    var url_course = $(this).data('url');
+    console.log(url_course)
+    console.log(courseId)
+
+
+    $.ajax({
+       
+        type:'POST',
+        url:url_course,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        data: {
+            'course_id':courseId,
+            'csrfmiddlewaretoken': '{{ csrf_token }}'
+        },
+        success:function(data){
+            alert('Enrolled Successfully');
+
+        },
+        error:function(xhr,status,error){
+            console.error('Error:',error);
+        }
+    });
+  });
+
+
+
+});
+
+
+</script>
+
+{% endblock script %}

@@ -1,5 +1,5 @@
 from django.urls import path
-from ols_app.views import index_page,course_page,contact_page,about_page,teacher_page,dashboard_page
+from ols_app.views import index_page,course_page,contact_page,about_page,teacher_page,dashboard_page,add_to_dashboard
 app_name="ols_name"
 urlpatterns = [
     path('', index_page,name="home"),
@@ -8,6 +8,8 @@ urlpatterns = [
     path('course/', course_page,name="course"),
     path('teacher/', teacher_page,name="teacher"),
     path('dashboard/', dashboard_page,name="dashboard"),
+    path('add-to-dashboard/', add_to_dashboard,name="Enrolled"),
+
 
 
 

@@ -12,3 +12,5 @@ menu.addEventListener('click',()=>{
     console.log('clicked')
     navbar.classList.toggle('show')
 })
+
+
