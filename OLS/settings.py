@@ -147,6 +147,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "useraccount.User"
 
 AUTHENTICATION_BACKENDS = [
+    'useraccount.backends.TeacherBackend',
     'useraccount.views.EmailBackend',
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
@@ -154,22 +155,24 @@ AUTHENTICATION_BACKENDS = [
                            
     ]
 
+
+
+
 SOCIALACCOUNT_PROVIDERS = {
     'facebook': {
         'APP': {
-            'client_id': '',
-            'secret': '',
+            # 'client_id': '117533491451518',
+            # 'secret': 'b3448356cc47d318375dd4da9dc0d1a0',
             'key': 'your_facebook_app_key',  # Optional
         }
     },
     'google': {
         'APP': {
-            'client_id': 'your_google_client_id',
-            'secret': 'your_google_client_secret',
+            # 'client_id': '918077183706-vr9k9npott5cvr9m1do25p1kctnd70gh.apps.googleusercontent.com',
+            # 'secret': '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',
         }
     }
 }
-
 
 SITE_ID = 1
 ACCOUNT_EMAIL_VERIFICATION = 'none'

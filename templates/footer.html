@@ -12,6 +12,11 @@
             <a href="{% url 'ols_name:course' %}"> <i class="fas fa-arrow-right"></i> courses </a>
             <a href="{% url 'ols_name:teacher' %}"> <i class="fas fa-arrow-right"></i> teachers </a>
             <a href="{% url 'ols_name:contact' %}"> <i class="fas fa-arrow-right"></i> contact </a>
+            {% if not user.is_authenticated %}
+            <a href="{% url 'user:teacher_login' %}"> <i class="fas fa-arrow-right"></i> Become A Teacher </a>
+            {% endif %}
+
+
         </div>
 
         <div class="box">

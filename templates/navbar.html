@@ -25,15 +25,31 @@
        {% endif %}
 
        {% if user.is_authenticated %}
-       <div id="signout-show" class="dropdown">
-        <button class="btn dropdown-toggle" style="color:white; font-size:1.5rem; border:0;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {{user.username}}<span class="login-logo"><img src = "{% static 'images/man.png'%}"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="{% url 'ols_name:dashboard' %}"><h5>Dashboard</h5></a></li>
-          <li><a class="dropdown-item" href="{% url 'user:logout' %}"><h5>Logout</h5></a></li>
-        </ul>
-      </div>
+        {% if user.role == 'student' %}
+            <div id="signout-show" class="dropdown">
+              <button class="btn dropdown-toggle" style="color:white; font-size:1.5rem; border:0;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{user.username}}<span class="login-logo"><img src = "{% static 'images/man.png'%}"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'ols_name:dashboard' %}"><h5>Dashboard</h5></a></li>
+                <li><a class="dropdown-item" href="{% url 'user:logout' %}"><h5>Logout</h5></a></li>
+              </ul>
+            </div>
+          {% elif user.role == 'teacher' %}
+
+            <div id="signout-show" class="dropdown">
+              <button class="btn dropdown-toggle" style="color:white; font-size:1.5rem; border:0;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{user.username}}<span class="login-logo"><img src = "{% static 'images/man.png'%}"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'ols_name:teacher_dashboard' %}"><h5>Dashboard</h5></a></li>
+                <li><a class="dropdown-item" href="{% url 'user:logout' %}"><h5>Logout</h5></a></li>
+              </ul>
+            </div>
+
+
+
+          {% endif %}
        {% endif %}
    </nav>
    {% if not user.is_authenticated %}

@@ -543,3 +543,76 @@ header #login:hover{
   font-weight: bold;
 
 }
+
+
+/* Detail Page */
+
+.detail_title{
+  font-size: 5.5rem;
+  padding:1rem;
+}
+
+.uploaded_by{
+  font-size: 1.2rem;
+  color:grey;
+  padding-top:.2rem;
+  padding-left:1.5rem;
+  text-transform: capitalize;
+  font-style: italic;
+}
+.detail_video{
+  padding:1.4rem 1rem;
+}
+.detail_paragraph{
+  padding:2rem 1rem;
+  font-size: 2rem;
+}
+
+.source-file{
+  padding:1.9rem 1rem;
+
+}
+.source-file h2{
+  color:#224bcf;
+}
+
+
+.comment-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Style individual comments */
+.comment {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f7f7f7;
+}
+
+/* Style the comment author */
+.comment-author {
+  font-weight: bold;
+  font-size:2rem;
+}
+
+/* Style the "You" label for the current user's comments */
+.your-comment {
+  color: #007bff; /* Blue color, adjust as needed */
+  margin-left: 5px;
+  font-size:2rem;
+
+}
+
+/* Style the comment text */
+.comment-text {
+  margin-top: 5px;
+  font-size:1rem;
+
+}
+
+/* Style comment metadata (date, etc.) */
+.comment-meta {
+  font-size: 12px;
+  color: #999;
+}

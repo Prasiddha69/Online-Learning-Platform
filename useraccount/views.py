@@ -7,20 +7,22 @@ from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-
-User = get_user_model()
+from .t_forms import TeacherRegistrationForm,TeacherLoginForm
+from .models import User
+from django.contrib.auth.views import LoginView
 
 class EmailBackend(ModelBackend):
     def authenticate(self, request, email=None, password=None, **kwargs):
-        User = get_user_model()
+        # User = get_user_model()
         try:
-            user = User.objects.get(email=email)
+            user = User.objects.get(email=email,role='student')
             if user.check_password(password):
                 return user
         except User.DoesNotExist:
             return None
 
-    
+
+
 
 # Create your views here.
 def login_view(request):
@@ -39,10 +41,9 @@ def login_view(request):
         try:
                 valid_user = authenticate(request,email=user_email, password=user_pass)
                 print(valid_user)
-                if valid_user is None or isinstance(valid_user, AnonymousUser):
+                if valid_user is None or isinstance(valid_user, AnonymousUser) and valid_user.role == 'teacher':
                     messages.add_message(request, messages.ERROR, "Invalid email or password")
                     return redirect("user:login")
-
                 login(request, valid_user)
                 return redirect("ols_name:home")
 
@@ -60,7 +61,7 @@ def register_view(request):
             print("form saved")
             messages.add_message(request, messages.INFO, "Registered Successfully")
     else:
-        print("Form doesnot")
+        
         form = RegisterForm()
 
     
@@ -73,3 +74,45 @@ def register_view(request):
 def logout_view(request):
     logout(request)
     return redirect('ols_name:home')
+
+
+
+def teacher_register_view(request):
+    if request.method == "POST":
+        form = TeacherRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.role = 'teacher'
+            user.save()
+            user.backend = 'useraccount.backends.TeacherBackend'
+            messages.add_message(request, messages.INFO, "Registered Successfully")
+
+
+    else:
+        form=TeacherRegistrationForm()
+    return render(request,'teacher_register.html',{'form':form})
+
+
+
+
+def teacher_login_view(request):
+    form = TeacherLoginForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            print(user)
+
+            if user is not None and user.role == 'teacher':
+                # Explicitly specify the authentication backend
+                # user.backend = 'useraccount.views.UsernameBasedAuthenticationBackend'
+                login(request, user)
+                # Add your login success logic here
+                return redirect('ols_name:teacher_dashboard')
+            else:
+                    messages.add_message(request, messages.ERROR, "Please enter valid credentials")
+
+
+    return render(request, 'teacher_login.html', {'form': form})
+

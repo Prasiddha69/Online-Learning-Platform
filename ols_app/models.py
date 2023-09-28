@@ -18,9 +18,9 @@ class Course(TimeStampModel):
     card_image = models.ImageField(upload_to='uploads/images/')
     video_url = EmbedVideoField(blank=True,null=True)  # same like models.URLField()
     video_file = models.FileField(upload_to='uploads/videos/', null=True, verbose_name="video",blank=True)
-    paragraph = models.TextField(blank=True, null=True)
+    paragraph = models.TextField(blank=False,null=False)
     source_file = models.FileField(upload_to='uploads/file/',null=True,blank=True)
-    uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)  # Assuming you have a User model
+    uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True,default="admin")  # Assuming you have a User model
 
     def __str__(self):
         return f"{self.course_name}"
@@ -29,7 +29,6 @@ class Course(TimeStampModel):
 
 
 class Enroll(TimeStampModel):
-    has_finished = models.BooleanField(default=False)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     is_enrolled = models.BooleanField(default=False)
     course = models.ForeignKey(Course,on_delete=models.CASCADE)
@@ -41,5 +40,11 @@ class Enroll(TimeStampModel):
 
 
 
-
+class Comment(TimeStampModel):
+    course = models.ForeignKey(Course,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    text = models.TextField()
+    
+    def __str__(self):
+        return f"Comment by {self.user.username}"
 

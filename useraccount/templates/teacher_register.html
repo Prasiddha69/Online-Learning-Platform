@@ -1,0 +1,48 @@
+{% extends 'base_site.html' %}
+
+{% block maincontent %}
+<div class="container">
+    <section class="container_form forms">
+
+        <div class="form signup">
+            <div class="form-content">
+
+                <h2>Teacher Register</h2>
+                <form action="" method="post" autocomplete="off">
+                    {% csrf_token %}
+                    {% comment %} {{form.as_p}} {% endcomment %}
+                    {% for field in form %}
+
+                        <div class="field input-fields">
+                            {% if field.name == 'role' %}
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {% endif %}
+                            {{ field }}
+                        </div>
+                        {% if field.errors %}
+                            <div class="error-message">
+                                {% for error in field.errors %}
+                                <span class="error-text">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endfor%}
+          
+
+                    <div class="field button-field">
+                        <button type="submit">Signup</button>
+                    </div>
+                    
+                    
+                    {% comment %} <button type="submit">submit</button> {% endcomment %}
+                </form>
+
+                <div class="form-link">
+                    <span>Already have an account? <a href="{% url 'user:teacher_login' %}" class="link login-link">Login</a></span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock maincontent %}

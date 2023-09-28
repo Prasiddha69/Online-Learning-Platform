@@ -1,0 +1,56 @@
+{% extends 'base_site.html' %}
+
+{% block maincontent %}
+
+<div class="container">
+    <section class="container_form forms">
+        <div class="form login">
+            <div class="form-content">
+
+
+
+                <h2>Teacher Login</h2>
+                {% if messages %}
+                {% for message in messages %}
+                 <div class="alert alert-info mt-4">{{message}}</div>
+                {% endfor %}
+            {% endif %}
+                <form action="{% url 'user:teacher_login' %}" method="post">
+                    {% csrf_token %}
+                    {% comment %} {{form.as_p}} {% endcomment %}
+                    {% comment %} <div class="form-group">
+                        <label for="username">Username:</label>
+                        {{ form.username }}
+                    </div> {% endcomment %}
+                    <div class="field input-field">
+                        {% comment %} <label for="username">Username:</label> {% endcomment %}
+
+                        <input type="text" placeholder="Username" class="input" id="username" name="{{ form.username.name }}" required>
+                    </div>
+                    {% comment %} <div class="form-group">
+                        <label for="password">Password:</label>
+                        {{ form.password }}
+                    </div> {% endcomment %}
+                    <div class="field input-field">
+                        {% comment %} <label for="password">Password:</label> {% endcomment %}
+
+                        <input type="password" placeholder="Password" class="input" id="password" name="{{ form.password.name }}" required>
+                    </div>
+                    
+                    
+                    <div class="field button-field">
+                        <button type="submit">Login</button>
+                    </div>                
+                </form>
+
+                <div class="form-link">
+                    <span>Don't you have an account? <a href="{% url 'user:teacher_register' %}" class="link login-link">Register</a></span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+{% endblock maincontent %}

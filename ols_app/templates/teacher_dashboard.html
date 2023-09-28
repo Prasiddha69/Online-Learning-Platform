@@ -1,0 +1,20 @@
+{% extends 'base_dashboard.html' %}
+
+{% block dashboardcontent %}
+
+<section class="course-1" style="margin-top:2rem;">
+  {% for create_course in created_course %}
+    <div class="box">
+        <img src="{{create_course.card_image.url}}" alt="">
+        <h3>{{create_course.course_name}}</h3>
+        <p>{{create_course.card_desc}}</p>
+        <a href="{% url 'ols_name:detail' create_course.id %}" class="btn_detail">course materials</a>
+    </div>
+    {% endfor %}
+
+
+</section>
+
+
+{% endblock dashboardcontent %}
+
