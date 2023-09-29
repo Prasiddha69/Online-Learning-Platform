@@ -1,19 +1,20 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required,user_passes_test
 from ols_app.models import Course,Enroll,Comment
+from django.contrib.auth import get_user_model
 
 from ols_app.forms import UploadCourseForm,CommentForm
 from django.contrib.auth.models import User
 
 from django.http import JsonResponse
-
+User = get_user_model()
 # Create your views here.
 def index_page(request):
     return render(request,'index.html')
 
 def course_page(request):
 
-    courses = Course.objects.all().order_by('-id')
+    courses = Course.objects.order_by('-id')[:12]
     context ={'courses':courses}
     return render(request,"course.html",context)
 
@@ -24,7 +25,10 @@ def contact_page(request):
     return render(request,"contact.html")
 
 def teacher_page(request):
-    return render(request,"teacher.html")
+    teachers = User.objects.filter(role='teacher').order_by('-id')[:12]
+    print(teachers)
+    context = {'teachers':teachers}
+    return render(request,"teacher.html",context)
 
 @login_required(login_url='user:login')
 def dashboard_page(request):
@@ -77,7 +81,7 @@ def add_to_dashboard(request):
 @login_required(login_url='user:login')
 def detail_page(request,courseid):
     course = Course.objects.get(id=courseid)
-    comments = Comment.objects.filter(course=course)
+    comments = Comment.objects.filter(course=course).all().order_by('-id')[:5]
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():

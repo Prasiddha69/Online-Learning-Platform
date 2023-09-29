@@ -11,6 +11,7 @@ class UploadCourseForm(ModelForm):
             'course_name': TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter course name'}),
             'card_desc': TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter card description'}),
             'video_url': TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter video URL','required':False}),
+            'paragraph': Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter about course detail'}),
             'source_file': FileInput(attrs={'class': 'form-control','required':False}),
         }
 

@@ -73,6 +73,8 @@ def register_view(request):
 @login_required
 def logout_view(request):
     logout(request)
+      # Set the session to expire immediately
+    request.session.set_expiry(0)
     return redirect('ols_name:home')
 
 

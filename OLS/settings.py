@@ -182,4 +182,5 @@ LOGIN_REDIRECT_URL = 'ols_name:home'
 # LOGOUT_REDIRECT_URL = "ols_name:home"
 
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 

@@ -10,10 +10,10 @@
 </section>
 
 <section class="teachers">
-
+{% for teacher in teachers %}
     <div class="box">
         <div class="image">
-            <img src="" alt="">
+            <img src="{% static 'images/teacher-8.png' %}" alt="{{teacher.username}}">
             <div class="share">
                 <a href="#" class="fab fa-facebook-f"></a>
                 <a href="#" class="fab fa-twitter"></a>
@@ -22,12 +22,11 @@
             </div>
         </div>
         <div class="content">
-            <h3>Jonish Sapkota</h3>
-            <span>Computer Network</span>
+            <h3>{{teacher.username}}</h3>
         </div>
     </div>
-
-    <div class="box">
+{% endfor %}
+    {% comment %} <div class="box">
         <div class="image">
             <img src="images/teacher-2.png" alt="">
             <div class="share">
@@ -137,7 +136,7 @@
             <h3>Ram Sharma</h3>
             <span>Computer Graphics</span>
         </div>
-    </div>
+    </div> {% endcomment %}
 
 </section>
 
