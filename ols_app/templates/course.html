@@ -105,10 +105,17 @@
           icon: 'success',
     
         })
-    
-    
-    
     }
+    function handleSuccessInfo(data){
+        Swal.fire({
+            title: 'info',
+            text: data,
+            icon: 'info',
+    
+        })
+
+    }
+    
     // Function to handle an error in the AJAX request
     function handleError(error) {
         Swal.close(); // Close the loading modal
@@ -126,7 +133,6 @@ $(document).ready(function(){
 
     var courseId = $(this).data('course-id');
     var url_course = $(this).data('url');
-    console.log(url_course)
     console.log(courseId)
 
 
@@ -142,10 +148,21 @@ $(document).ready(function(){
             'csrfmiddlewaretoken': '{{ csrf_token }}'
         },
         success:function(data){
-         alert(data.message)
+            msg = data.message
+            console.log(msg)
+            if (msg == 'Course added to dashboard')
+            {
+
+                handleSuccess(msg)
+            }
+            else
+            {
+                handleSuccessInfo(msg)
+            }
+
         },
         error:function(xhr,status,error){
-
+            handleError(error.message)
             console.error('Error:',error);
         }
     });
