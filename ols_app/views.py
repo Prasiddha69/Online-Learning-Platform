@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.views.generic.edit import FormView
-from ols_app.decorators import teacher_required
+from ols_app.decorators import teacher_required,student_required
 from django.http import JsonResponse
 User = get_user_model()
 # Create your views here.
@@ -35,6 +35,7 @@ def teacher_page(request):
     return render(request,"teacher.html",context)
 
 @login_required(login_url='user:login')
+@student_required
 def dashboard_page(request):
     user = request.user
     print(f'User Role: {user.role}')
