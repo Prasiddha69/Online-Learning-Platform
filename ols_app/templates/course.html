@@ -11,8 +11,8 @@
 <section class="course-1">
    {% for course in courses %}
     <div class="box">
-        {% if course.card_image %}
-        <img src="{{course.card_image.url}}" alt="">
+        {% if course.image %}
+        <img src="{{course.image.url}}" alt="">
         {% endif %}
         <h3>{{course.course_name}}</h3>
         <p>{{course.card_desc}}</p>

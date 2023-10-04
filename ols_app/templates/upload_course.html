@@ -1,5 +1,4 @@
 {% extends 'base_dashboard.html' %}
-
 {% block dashboardcontent %}
     <section class="course-1" style="margin-top:2rem;">
 
@@ -11,13 +10,14 @@
                 <div class="form signup">
                     {% if messages %}
                     {% for message in messages %}
-                     <div class="alert alert-info mt-4">{{message}}</div>
-                
+                    <div class="alert alert-info mt-4">{{message}}</div>
+                    
                     {% endfor %}
-                {% endif %}
+                    {% endif %}
                     <form action="" method="post" enctype="multipart/form-data">
-                   
-                            {% csrf_token %}
+                        
+                        {% csrf_token %}
+                        {{form.media}}
                             {% comment %} {% for field in form %}
                             <div class="field input-fields">
                                 <div class="mb-3">
@@ -48,22 +48,22 @@
                                 {{ form.card_desc }}
                                 </div>
                             </div>
-                            {% comment %} <div class="form-group">
-                                <div class="mb-3">
-                                <label for="{{ form.card_image.id_for_label }}" class="form-label">Card Image:</label><span class="color:red">*</span>
-                                {{ form.card_image }}
-                                </div>
-                            </div> {% endcomment %}
                             <div class="form-group">
                                 <div class="mb-3">
-                                <label for="{{ form.video_url.id_for_label }}" class="form-label">Video URL:</label>
-                                {{ form.video_url }}
+                                <label for="{{ form.card_image.id_for_label }}" class="form-label">Card Image:</label><span class="color:red">*</span>
+                                {{ form.image }}
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="mb-3">
-                                <label for="{{ form.paragraph.id_for_label }}" class="form-label">Course Paragraph:</label><span class="color:red">*</span>
-                                {{ form.paragraph }}
+                                    <label for="{{ form.content.id_for_label }}" class="form-label">Content:</label>
+                                    {{ form.content }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="mb-3">
+                                <label for="{{ form.video_url.id_for_label }}" class="form-label">Video URL:</label>
+                                {{ form.video_url }}
                                 </div>
                             </div>
                            {{fileField.management_form}}
@@ -96,3 +96,31 @@
     </section>
 
 {% endblock dashboardcontent %}
+{% block script %}
+{{block.super}}
+
+<script src="//cdn.ckeditor.com/4.23.0-lts/standard/ckeditor.js"></script>
+{% comment %} <script>
+    // Replace 'your_textarea_id' with the actual ID of your textarea field
+    CKEDITOR.replace('{{ form.content.id_for_label }}');
+</script> {% endcomment %}
+<script>
+    function getToken(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+      var csrftoken = getToken('csrftoken');
+  
+</script>
+{% endblock script %}

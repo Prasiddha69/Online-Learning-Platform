@@ -1,6 +1,7 @@
 {% extends "base_site.html" %}
 {% block maincontent %}
 {% load embed_video_tags %}
+{% load custom_filters %}
 
 <div class="container mt-3">
     <div class="detail_header">
@@ -18,8 +19,8 @@
 
         {% endif %}
 
-        {% if course.paragraph %}
-        <div class="text-justify detail_paragraph">{{ course.paragraph|safe }}</div>
+        {% if course.content %}
+        <div class="text-justify detail_paragraph">{{ course.content|safe }}</div>
 
 
         {% endif %}
@@ -39,16 +40,19 @@
 
         
     </div>
-    {% if course.source_file %}
+    {% if files %}
     <div class="source-file">
         <h2>Source File</h2>
-        {% for file in course.source_file.all %}
-
-          <embed src="{{ file.url }}" type="application/pdf" width="50" height="50" />{{file.name}}
+        <div class="d-flex justify-content-around">
+        {% for file in files %}
+           <div class="d-flex flex-column">
+          <embed src="{{ file.source_file.url }}" type="application/pdf" width="30" height="30" />
           {% comment %} <object data="{{ course.source_file.url }}" type="application/pdf" width="100%" height="500px"> {% endcomment %}
 
-          <p><a href="{{ file.url }}" download>Download PDF</a></p>
+          <p><a href="{{ file.source_file.url }}" download>{{file.source_file.name|filename}}</a></p>
+        </div>
         {% endfor %}
+        </div>
 
     </div>
     {% endif %}

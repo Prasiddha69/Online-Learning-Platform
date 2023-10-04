@@ -93,7 +93,7 @@
       <section class="course-1" style="margin-top:2rem;">
         {% for enroll_course in enrolled_course %}
           <div class="box">
-              <img src="{{enroll_course.course.card_image.url}}" alt="">
+              <img src="{{enroll_course.course.image.url}}" alt="">
               <h3>{{enroll_course.course.course_name}}</h3>
               <p>{{enroll_course.course.card_desc}}</p>
               <a href="{% url 'ols_name:detail' enroll_course.course.id %}" class="btn_detail">course materials</a>

@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.views.generic.edit import FormView
-
+from ols_app.decorators import teacher_required
 from django.http import JsonResponse
 User = get_user_model()
 # Create your views here.
@@ -87,6 +87,8 @@ def add_to_dashboard(request):
 def detail_page(request,courseid):
     course = Course.objects.get(id=courseid)
     comments = Comment.objects.filter(course=course).all().order_by('-id')[:5]
+    files = FileField.objects.filter(course=course).all().order_by('-id')
+    print(files)
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -96,11 +98,12 @@ def detail_page(request,courseid):
             comment.save()
     else:
         form = CommentForm()
-    context={'course':course,'form':form,"comments":comments}
+    context={'course':course,'form':form,"comments":comments,"files":files}
     return render(request,'detail_page.html',context) 
 
 
 @login_required(login_url='user:teacher_login')
+@teacher_required
 def teacher_dashboard_page(request):
     user = request.user
     print(f'User Role: {user.role}')
@@ -109,15 +112,20 @@ def teacher_dashboard_page(request):
     context = {'created_course':created_course}
     return render(request,'teacher_dashboard.html',context)
 
+def is_teacher(user):
+    return user.is_authenticated and user.role == "teacher"
+
+
 
 @login_required(login_url='user:teacher_login')
+# @user_passes_test(is_teacher,login_url="user:teacher_login")
+@teacher_required
 def teacher_upload_view(request):
     fileField = FileUploadForm()  # Initialize the form
     print("Started here")
-    print(fileField)
 
     if request.method == "POST":
-        form = UploadCourseForm(request.POST)
+        form = UploadCourseForm(request.POST,request.FILES)
         # fileField = FileUploadForm(request.FILES or None)
 
         files = request.FILES.getlist('source_file')    
@@ -161,6 +169,7 @@ def teacher_upload_view(request):
     context={'form':form,'fileField':fileField}
     return render(request,'upload_course.html',context)
 
+@login_required
 def add_comment_to_course(request,courseid):
     course = Course.objects.get(pk=courseid)
     if request.method == 'POST':

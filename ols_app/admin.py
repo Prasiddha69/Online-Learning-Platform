@@ -7,6 +7,6 @@ admin.site.register(Comment)
 
 # admin.register(FileFieldAdmin)
 class FileFieldAdmin(admin.ModelAdmin):
-    list_display=('id','source_file','course')
+    list_display=('id','source_file','course','created_at','modified_at')
 
 admin.site.register(FileField,FileFieldAdmin)

@@ -44,7 +44,10 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
     'ols_app',
+    'ckeditor',
+    'ckeditor_uploader',
     'useraccount',
+    'imagekit',
     'embed_video',
 ]
 
@@ -73,6 +76,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': {
+                'custom_filters': 'ols_app.custom_filters',
+            },
         },
     },
 ]
@@ -187,3 +193,6 @@ LOGIN_REDIRECT_URL = 'ols_name:home'
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+AWS_QUERYSTRING_AUTH = True

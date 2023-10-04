@@ -1,6 +1,8 @@
 from django import forms
 from django.forms import ClearableFileInput, ModelForm,TextInput,Textarea,FileInput,Select,ImageField
 from .models import Course,Comment,FileField
+from ckeditor.widgets import CKEditorWidget
+
 class MultipleFileInput(forms.ClearableFileInput):
     allow_multiple_selected = True
 
@@ -31,19 +33,25 @@ class UploadCourseForm(ModelForm):
  
     class Meta:
         model = Course
-        fields = ('course_name','card_desc','video_url','paragraph')
+        fields = ('course_name','card_desc','image','content','video_url',)
         
         widgets = {
-            'course_name': TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter course name'}),
-            'card_desc': TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter card description'}),
-            'video_url': TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter video URL','required':False}),
-            'paragraph': Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter about course detail'}),
+            'course_name': TextInput(attrs={'label':'Course Name *','class': 'form-control', 'placeholder': 'Enter course name'}),
+            'card_desc': TextInput(attrs={'label':'Course Description *','class': 'form-control', 'placeholder': 'Enter card description'}),
+            'video_url': TextInput(attrs={'label':'Video Url ','class': 'form-control', 'placeholder': 'Enter video URL','required':False}),
+            'content': CKEditorWidget(),  # Use the CKEditor widget for the 'content' field
+
+        
             # 'source_file':ClearableFileInput(attrs={'allow_multiple_selected': True,'required':False}),
     #         # 'source_file': FileInput(attrs={'class': 'form-control', 'required': False}),
             # 'source_file': forms.FileInput(attrs={'multiple': True}),
 
     #   
         }
+        image = forms.ImageField(
+        label='Card Image*',  # Add a label with an asterisk (*) to indicate required
+        required=True,  # Set the field as required
+    )
     # def clean_source_file(self):
     #     source_files = self.cleaned_data.get('source_file', [])  # Initialize as an empty list
     #     max_file_size = 1048576000  # 1GB in bytes
