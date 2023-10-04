@@ -6,9 +6,14 @@ cryptography==41.0.4
 defusedxml==0.7.1
 Django==4.2.2
 django-allauth==0.56.1
+django-appconf==1.0.5
+django-ckeditor==6.7.0
 django-embed-video==1.4.9
+django-imagekit==5.0.0
+django-js-asset==2.1.0
 idna==3.4
 oauthlib==3.2.2
+pilkit==3.0
 Pillow==10.0.0
 psycopg2-binary==2.9.6
 pycparser==2.21
