@@ -1,6 +1,6 @@
 from django import forms
-from django.forms import ClearableFileInput, ModelForm,TextInput,Textarea,FileInput,Select,ImageField
-from .models import Course,Comment,FileField
+from django.forms import ClearableFileInput, ModelForm,TextInput,Textarea,FileInput,Select,ImageField,EmailInput,NumberInput
+from .models import Course,Comment,FileField,ContactCustomer
 from ckeditor.widgets import CKEditorWidget
 
 class MultipleFileInput(forms.ClearableFileInput):
@@ -105,3 +105,23 @@ class CommentForm(ModelForm):
 
 
         }
+
+
+class ContactCustomerForm(ModelForm):
+    class Meta:
+        model = ContactCustomer
+        fields = ['username','number','useremail','message']
+
+
+        widgets = {            
+            'username': TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your name'}),
+            'number': NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter your phone number'}),
+            'useremail': EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter your email address'}),
+            'message': Textarea(attrs={'class': 'form-control', 'placeholder': 'Write message ....'}),
+
+
+
+
+        }
+
+

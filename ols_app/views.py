@@ -4,7 +4,7 @@ from ols_app.models import Course,Enroll,Comment,FileField
 from django.contrib.auth import get_user_model
 import uuid
 import os
-from ols_app.forms import UploadCourseForm,CommentForm,FileUploadForm
+from ols_app.forms import UploadCourseForm,CommentForm,FileUploadForm,ContactCustomerForm
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.exceptions import ValidationError
@@ -26,7 +26,21 @@ def about_page(request):
     return render(request,"about.html")
 
 def contact_page(request):
-    return render(request,"contact.html")
+    if request.method == "POST":
+        form = ContactCustomerForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.INFO, "Contacted Successfully")
+            return redirect('ols_name:contact')
+
+
+    else:
+        form = ContactCustomerForm()
+
+
+    return render(request,'contact.html',{'form':form})
+
 
 def teacher_page(request):
     teachers = User.objects.filter(role='teacher').order_by('-id')[:12]
@@ -201,3 +215,6 @@ def add_comment_to_course(request,courseid):
 #             return self.form_valid(form)
 #         else:
 #             return self.form_invalid(form)
+
+  
+

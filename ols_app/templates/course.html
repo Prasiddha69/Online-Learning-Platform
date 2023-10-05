@@ -23,7 +23,7 @@
 
         {% else %}      
 
-        <button id="login_check" class="btn_detail">Enroll</button>
+        <button id="login_check" class="btn_detail login_suggest">Enroll</button>
         {% endif %}
 
 
@@ -127,15 +127,14 @@
     }
 
 
-let login_check = document.getElementById('login_check');
-$(document).ready(function(){
-  $('.add_to_dashboard').click(function(){
+    $(document).ready(function(){
+        $('.add_to_dashboard').click(function(){
 
-    var courseId = $(this).data('course-id');
+            var courseId = $(this).data('course-id');
     var url_course = $(this).data('url');
     console.log(courseId)
-
-
+    
+    
     $.ajax({
        
         type:'POST',
@@ -152,14 +151,14 @@ $(document).ready(function(){
             console.log(msg)
             if (msg == 'Course added to dashboard')
             {
-
+                
                 handleSuccess(msg)
             }
             else
             {
                 handleSuccessInfo(msg)
             }
-
+            
         },
         error:function(xhr,status,error){
             handleError(error.message)
@@ -169,9 +168,41 @@ $(document).ready(function(){
   });
 
 
-
+  
 });
 
+{% comment %} let login_check = document.querySelectorAll('.login_suggest');
+console.log(login_check)
+function suggestLogin(){
+    Swal.close(); // Close the loading modal
+    Swal.fire({
+      title: 'info',
+      text: 'login first',
+      icon: 'error',
+
+    })
+}
+login_check.addEventListener('click',suggestLogin) {% endcomment %}
+
+// Wrap the code in a function to ensure it runs after the page is loaded
+document.addEventListener('DOMContentLoaded', function () {
+let login_check = document.querySelectorAll('.login_suggest');
+console.log(login_check);
+
+function suggestLogin() {
+    Swal.close(); // Close the loading modal
+    Swal.fire({
+    title: 'Error',
+    text: 'login required',
+    icon: 'error',
+    });
+}
+
+// Loop through the NodeList and add click event listeners to each element
+login_check.forEach(function (element) {
+    element.addEventListener('click', suggestLogin);
+});
+});
 
 </script>
 

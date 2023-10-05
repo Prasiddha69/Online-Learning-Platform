@@ -33,13 +33,26 @@
     </div>
 
     <div class="row">
+        <h3>get in touch</h3>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-info mt-4">{{message}}</div>
+        
+        {% endfor %}
+        {% endif %}
+        <form action="" method="post">
+            {% csrf_token %}
+            {% for field in form %}
 
-        <form action="">
-            <h3>get in touch</h3>
-            <input type="text" placeholder="your name" class="box">
-            <input type="number" placeholder="your number" class="box">
+            <div class="form-group">
+                <div class="mb-3">
+                {{ field }}
+                </div>
+            </div>            
+            {% endfor %}
+            {% comment %} <input type="number" placeholder="your number" class="box">
             <input type="email" placeholder="your email" class="box">
-            <textarea name="" placeholder="your message" id="" cols="30" rows="10"></textarea>
+            <textarea name="" placeholder="your message" id="" cols="30" rows="10"></textarea> {% endcomment %}
             <input type="submit" value="send message" class="btn_detail">
         </form>
 

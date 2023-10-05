@@ -115,3 +115,13 @@ class Comment(TimeStampModel):
     def __str__(self):
         return f"Comment by {self.user.username}"
 
+
+
+class ContactCustomer(TimeStampModel):
+    username = models.CharField(max_length=250)
+    number = models.CharField(max_length=256)
+    useremail = models.CharField(max_length=256)
+    message = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"Contacted by {self.username}"

@@ -1,5 +1,12 @@
 {% extends "base_site.html" %}
 {% block maincontent %}
+{% block stylesheet %}
+{{block.super}}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.1/viewer.min.css">
+
+
+{% endblock stylesheet %}
 {% load embed_video_tags %}
 {% load custom_filters %}
 
@@ -46,8 +53,13 @@
         <div class="d-flex justify-content-around">
         {% for file in files %}
            <div class="d-flex flex-column">
-          <embed src="{{ file.source_file.url }}" type="application/pdf" width="30" height="30" />
+            {% if file.source_file.name|file_extension == 'pdf' %}
+            <embed src="{{ file.source_file.url }}" type="application/pdf" width="30" height="30px" />
           {% comment %} <object data="{{ course.source_file.url }}" type="application/pdf" width="100%" height="500px"> {% endcomment %}
+            {% elif file.source_file.name|file_extension in 'doc docx' %}
+            <iframe src="https://docs.google.com/viewer?url={{ file.source_file.url }}&embedded=true" width="30" height="30px"></iframe>
+            {% endif %}
+
 
           <p><a href="{{ file.source_file.url }}" download>{{file.source_file.name|filename}}</a></p>
         </div>
@@ -103,6 +115,23 @@
 
 {% endblock maincontent %}
 
+{% block script %}
 
+{{block.super}}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.1/viewer.min.js"></script>
+
+{% comment %} <script>
+
+const viewerOptions = {
+  inline:false, //open viewer in new tab
+}
+
+const viewerElements = document.querySelectorAll('iframe')
+viewerElements.forEach((element)=>{
+  new Viewer(element,viewerOptions);
+});
+</script> {% endcomment %}
+{% endblock script %}
 
 
