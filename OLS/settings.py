@@ -191,8 +191,17 @@ LOGIN_REDIRECT_URL = 'ols_name:home'
 # LOGOUT_REDIRECT_URL = "ols_name:home"
 
 
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 AWS_QUERYSTRING_AUTH = True
+
+SESSION_COOKIE_AGE = 300  # 5 minutes (adjust as needed)
+
+
+
+
+

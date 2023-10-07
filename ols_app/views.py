@@ -215,6 +215,3 @@ def add_comment_to_course(request,courseid):
 #             return self.form_valid(form)
 #         else:
 #             return self.form_invalid(form)
-
-  
-

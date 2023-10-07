@@ -53,12 +53,12 @@
         <div class="d-flex justify-content-around">
         {% for file in files %}
            <div class="d-flex flex-column">
-            {% if file.source_file.name|file_extension == 'pdf' %}
+            {% comment %} {% if file.source_file.name|file_extension == 'pdf' %}
             <embed src="{{ file.source_file.url }}" type="application/pdf" width="30" height="30px" />
-          {% comment %} <object data="{{ course.source_file.url }}" type="application/pdf" width="100%" height="500px"> {% endcomment %}
+          {% comment %} <object data="{{ course.source_file.url }}" type="application/pdf" width="100%" height="500px">
             {% elif file.source_file.name|file_extension in 'doc docx' %}
             <iframe src="https://docs.google.com/viewer?url={{ file.source_file.url }}&embedded=true" width="30" height="30px"></iframe>
-            {% endif %}
+            {% endif %} {% endcomment %}
 
 
           <p><a href="{{ file.source_file.url }}" download>{{file.source_file.name|filename}}</a></p>
